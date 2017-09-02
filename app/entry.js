@@ -1,3 +1,6 @@
-import funcTest from './app.js';
+import FirePlace from './scene';
 
-funcTest.test();
+let scene = new FirePlace();
+
+scene.init();
+// scene.animate();
