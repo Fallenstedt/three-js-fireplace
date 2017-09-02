@@ -1,10 +1,7 @@
 import * as THREE from 'three'
 import CONFIG from './config.js'
-import FireCube from './fireCube.js'
-import FireStream from './fireStream.js'
 import FireFloor from './fireFloor.js';
 import FirePlace from './firePlace.js'
-import Fire from './fire.js';
 import TWEEN from 'tween.js';
 
 const frustumSize = 20,
