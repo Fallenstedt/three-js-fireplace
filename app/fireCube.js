@@ -22,6 +22,7 @@ class FireCube {
     this.pointLight.shadow.bias = 0.001;
     this.pointLight.castShadow = true;
     this.pointLight.position.set(0, 0, 0.4)
+
     this.mesh.add(this.pointLight)
 
     this.xPosition = getRandomArbitrary(-2.0, 2.0)
