@@ -1,5 +1,5 @@
-import FirePlace from './scene';
+import Scene from './scene';
 
-let scene = new FirePlace();
+let scene = new Scene();
 
 scene.init();

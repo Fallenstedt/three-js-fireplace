@@ -5,6 +5,8 @@ class FireFloor {
     this.geometry = new THREE.PlaneGeometry(20, 20, 10, 10)
     this.material = new THREE.MeshLambertMaterial({color: 0xfff000, side: THREE.DoubleSide})
     this.mesh = new THREE.Mesh( this.geometry, this.material )
+
+    this.mesh.receiveShadow = true;
   }
 }
 

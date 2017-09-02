@@ -1,14 +1,16 @@
 import * as THREE from 'three'
+import CONFIG from './config.js'
 import FireCube from './fireCube.js'
 import FireStream from './fireStream.js'
 import FireFloor from './fireFloor.js';
-import Fire from './firePlace.js';
+import FirePlace from './firePlace.js'
+import Fire from './fire.js';
 import TWEEN from 'tween.js';
 
-const frustumSize = 10,
+const frustumSize = 20,
 aspect = window.innerWidth / window.innerHeight;
 
-class FirePlace {
+class Scene {
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera(
@@ -19,8 +21,7 @@ class FirePlace {
       1,
       2000);
     this.renderer = new THREE.WebGLRenderer();
-    this.firePlace = new Fire();
-    this.light = new THREE.DirectionalLight(0xffffff, 1)
+    this.firePit = new FirePlace();
     this.floor = new FireFloor();
     this.axisHelper = new THREE.AxisHelper(10)
 
@@ -29,25 +30,28 @@ class FirePlace {
     this.delta;
   }
 
+  buildDebugBox() {
+    var geom = new THREE.BoxGeometry(2, 2, 2)
+    var mat = new THREE.MeshLambertMaterial({color: 0xf94381})
+    var mesh = new THREE.Mesh(geom, mat)
+    mesh.castShadow = true;
+    return mesh
+  }
+
   init() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
 
-    this.light.position.y = 10;
-    this.light.position.z = 10;
-    this.light.position.x = 10;
-
-    this.camera.position.z = 5;
-    this.camera.position.y = -10;
+    this.camera.position.set(0, -10, 5)
 
     this.camera.lookAt(this.scene.position)
     this.scene.rotation.z = 45 * (Math.PI / 180)
 
-        // this.camera.rotation.y = 45 * Math.PI / 180;
+    this.scene.add(this.firePit.group)
     this.scene.add(this.floor.mesh)
-    this.scene.add(this.firePlace.group)
-    this.scene.add(this.axisHelper)
-    this.scene.add(this.light)
+    if (CONFIG.isDebug === true) {
+      this.scene.add(this.axisHelper)
+    }
 
     this.animate()
   }
@@ -65,4 +69,4 @@ class FirePlace {
 
 }
 
-export default FirePlace
+export default Scene
